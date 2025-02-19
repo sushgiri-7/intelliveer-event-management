@@ -1,0 +1,69 @@
+<mat-toolbar color="warning">
+  <button mat-raised-button color="accent" routerLink="/create">
+    ADD EVENT
+  </button>
+
+  <!-- Date Filter Button on the Right -->
+  <span class="spacer"></span>
+  <button mat-stroked-button color="primary" (click)="openDateFilter()">
+    <mat-icon>event</mat-icon> Filter by Date
+  </button>
+</mat-toolbar>
+
+<div class="container">
+  <!-- Search Field -->
+  <mat-form-field appearance="outline">
+    <mat-label>Search Events</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Enter title or location"
+    />
+  </mat-form-field>
+
+  <mat-list>
+    <mat-list-item
+      *ngFor="let event of filteredEvents"
+      class="custom-list-item"
+    >
+      <!-- Event Details (Left Side) -->
+      <div class="event-details">
+        <p><strong>Title: </strong>{{ event.title }}</p>
+        <p><strong>Location: </strong> {{ event.location }}</p>
+        <p><strong>Description: </strong> {{ event.description }}</p>
+      </div>
+
+      <!-- Right Side: Action Buttons -->
+
+      <div class="action-buttons">
+        <button mat-button color="accent" [routerLink]="'/edit/' + event.id">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+        <button mat-button color="warn" (click)="deleteEvent(event.id)">
+          <mat-icon>delete</mat-icon> Delete
+        </button>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+
+  <!-- Pagination -->
+  <mat-paginator
+    [length]="filteredEvents.length"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>
+
+<!-- <mat-form-field appearance="outline" *ngIf="enableDateInput">
+  <button mat-icon-button matSuffix (click)="clearDateFilter()">
+    <mat-icon>clear</mat-icon>
+  </button>
+
+  <mat-label>Pick a Date</mat-label>
+  <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" />
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker (dateChange)="filterByDate()"></mat-datepicker>
+</mat-form-field> -->

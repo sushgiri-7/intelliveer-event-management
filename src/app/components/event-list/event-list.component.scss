@@ -1,0 +1,16 @@
+.custom-list-item {
+  display: flex;
+  justify-content: space-between; /* Ensures spacing between details and buttons */
+  align-items: center;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Toolbar Spacer to push Date Filter Button to the right */
+.spacer {
+  flex-grow: 1;
+}
