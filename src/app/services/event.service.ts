@@ -44,4 +44,17 @@ export class EventService {
   private saveEvents() {
     localStorage.setItem('events', JSON.stringify(this.events));
   }
+
+  // Converts date to 'YYYY-MM-DD' (ignores time zone)
+  formatDateToUTC(date: any): string {
+    let d = new Date(date);
+    d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); // Adjust for timezone
+    return d.toISOString().split('T')[0]; // Return only date part
+  }
+
+  // Converts 'YYYY-MM-DD' back to a Date object (local time)
+  convertToLocalDate(dateStr: string): Date {
+    let [year, month, day] = dateStr.split('-').map(Number);
+    return new Date(year, month - 1, day); // Create date without shifting time
+  }
 }

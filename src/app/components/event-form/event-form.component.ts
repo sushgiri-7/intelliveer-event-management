@@ -36,6 +36,7 @@ export class EventFormComponent implements OnInit {
       this.eventId = Number(id);
       const event = this.eventService.getEventById(this.eventId);
       if (event) {
+        this.eventService.convertToLocalDate(event.date);
         this.eventForm.patchValue(event);
       }
     }
@@ -47,6 +48,7 @@ export class EventFormComponent implements OnInit {
         id: this.eventId ?? 0,
         ...this.eventForm.value,
       };
+      eventData.date = this.eventService.formatDateToUTC(eventData.date);
 
       if (this.eventId) {
         this.eventService.updateEvent(eventData);

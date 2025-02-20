@@ -51,7 +51,8 @@ export class EventListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((selectedDate) => {
       if (selectedDate) {
         this.filteredEvents = this.events.filter(
-          (event) => event.date === selectedDate.toISOString()
+          (event) =>
+            event.date === this.eventService.formatDateToUTC(selectedDate)
         );
       } else {
         this.filteredEvents = [...this.events]; // Reset filter if no date selected

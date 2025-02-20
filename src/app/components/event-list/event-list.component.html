@@ -45,7 +45,7 @@
       <!-- Right Side: Action Buttons -->
 
       <div class="action-buttons">
-        <button mat-button color="warn" (click)="deleteEvent(event.id)">
+        <button mat-button color="warn" [routerLink]="'/event/' + event.id">
           <mat-icon>view</mat-icon> View
         </button>
         <button mat-button color="accent" [routerLink]="'/edit/' + event.id">
