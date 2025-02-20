@@ -3,9 +3,16 @@
     ADD EVENT
   </button>
 
+  <!-- calender-view -->
+  <span class="spacer"></span>
+
+  <button mat-raised-button color="primary" routerLink="/calender">
+    View Calender
+  </button>
+
   <!-- Date Filter Button on the Right -->
   <span class="spacer"></span>
-  <button mat-stroked-button color="primary" (click)="openDateFilter()">
+  <button mat-stroked-button color="accent" (click)="openDateFilter()">
     <mat-icon>event</mat-icon> Filter by Date
   </button>
 </mat-toolbar>

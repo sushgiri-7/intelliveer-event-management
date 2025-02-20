@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../state/event.model';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { DateFilterDialogComponent } from 'src/app/shared-components/date-filter-dialog/date-filter-dialog.component';
 
@@ -22,7 +21,6 @@ export class EventListComponent implements OnInit {
     this.events = this.eventService.getEvents();
 
     this.filteredEvents = [...this.events];
-    console.log(this.events, this.filteredEvents);
   }
 
   applyFilter(event: any) {

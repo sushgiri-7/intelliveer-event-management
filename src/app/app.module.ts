@@ -10,9 +10,18 @@ import { EventListComponent } from './components/event-list/event-list.component
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { EventFormComponent } from './components/event-form/event-form.component';
 import { DateFilterDialogComponent } from './shared-components/date-filter-dialog/date-filter-dialog.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
-  declarations: [AppComponent, EventListComponent, EventDetailsComponent, EventFormComponent, DateFilterDialogComponent],
+  declarations: [
+    AppComponent,
+    EventListComponent,
+    EventDetailsComponent,
+    EventFormComponent,
+    DateFilterDialogComponent,
+    CalendarComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,6 +29,7 @@ import { DateFilterDialogComponent } from './shared-components/date-filter-dialo
     MatModule,
     FormsModule,
     ReactiveFormsModule,
+    FullCalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
