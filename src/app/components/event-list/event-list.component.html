@@ -19,16 +19,18 @@
 
 <div class="container">
   <!-- Search Field -->
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="search-field">
     <mat-label>Search Events</mat-label>
     <input
       matInput
       (keyup)="applyFilter($event)"
       placeholder="Enter title or location"
     />
+    <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 
   <mat-list>
+    <span *ngIf="events.length === 0"> No Data Found </span>
     <mat-list-item
       *ngFor="let event of filteredEvents"
       class="custom-list-item"
@@ -43,6 +45,9 @@
       <!-- Right Side: Action Buttons -->
 
       <div class="action-buttons">
+        <button mat-button color="warn" (click)="deleteEvent(event.id)">
+          <mat-icon>view</mat-icon> View
+        </button>
         <button mat-button color="accent" [routerLink]="'/edit/' + event.id">
           <mat-icon>edit</mat-icon> Edit
         </button>
@@ -63,14 +68,3 @@
   >
   </mat-paginator>
 </div>
-
-<!-- <mat-form-field appearance="outline" *ngIf="enableDateInput">
-  <button mat-icon-button matSuffix (click)="clearDateFilter()">
-    <mat-icon>clear</mat-icon>
-  </button>
-
-  <mat-label>Pick a Date</mat-label>
-  <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" />
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker (dateChange)="filterByDate()"></mat-datepicker>
-</mat-form-field> -->

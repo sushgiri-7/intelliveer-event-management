@@ -1,0 +1,16 @@
+.full-width {
+  width: 100%;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.event-form-card {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+}

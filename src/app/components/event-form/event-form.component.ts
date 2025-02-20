@@ -66,4 +66,8 @@ export class EventFormComponent implements OnInit {
       panelClass: type,
     });
   }
+
+  redirectToListPage() {
+    this.router.navigate(['/']);
+  }
 }

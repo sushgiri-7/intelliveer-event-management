@@ -1,6 +1,16 @@
 <mat-toolbar color="primary">
   <span>Event Management</span>
   <span class="spacer"></span>
+  <!-- Back Button -->
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="redirectToListPage()"
+    class="full-width"
+  >
+    List Page
+  </button>
+
   <button mat-icon-button (click)="toggleDarkMode()">
     <mat-icon>{{ isDarkMode ? "light_mode" : "dark_mode" }}</mat-icon>
   </button>

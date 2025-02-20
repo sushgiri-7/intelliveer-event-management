@@ -14,3 +14,16 @@
 .spacer {
   flex-grow: 1;
 }
+
+// search field
+
+.search-field {
+  width: 100%;
+  max-width: 600px; /* Adjust width if needed */
+  display: block;
+  margin: 20px auto;
+
+  mat-icon {
+    cursor: pointer;
+  }
+}
