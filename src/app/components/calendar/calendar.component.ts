@@ -18,14 +18,23 @@ export class CalendarComponent implements OnInit {
       initialView: 'dayGridMonth',
       plugins: [dayGridPlugin, interactionPlugin],
       headerToolbar: {
-        left: 'prev,next today',
+        left: 'prev,next',
         center: 'title',
         right: 'dayGridMonth,dayGridWeek,dayGridDay',
       },
-      events: [
-        { title: 'Event 1', date: '2025-02-20' },
-        { title: 'Event 2', date: '2025-02-21' },
-      ],
+      height: 500, //  calendar height
+      // width: 500,
+      contentHeight: 300, // Further compact it
+      aspectRatio: 1.8, // Adjust proportions for better visibility
+      events: [],
+      buttonText: {
+        today: 'Today',
+        month: 'Month',
+        week: 'Week',
+        day: 'Day',
+      },
+      eventColor: '#ff4081', // Nice highlight color
+      themeSystem: 'bootstrap',
     };
 
     this.loadEvents();
