@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Event } from '../state/event.model';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +9,7 @@ import { Event } from '../state/event.model';
 export class EventService {
   private events: Event[] = [];
 
-  constructor() {
+  constructor(private router: Router, private snackBar: MatSnackBar) {
     const storedEvents = localStorage.getItem('events');
     this.events = storedEvents ? JSON.parse(storedEvents) : [];
   }
@@ -56,5 +58,18 @@ export class EventService {
   convertToLocalDate(dateStr: string): Date {
     let [year, month, day] = dateStr.split('-').map(Number);
     return new Date(year, month - 1, day); // Create date without shifting time
+  }
+
+  // redirectToList Page
+  redirectToListPage() {
+    this.router.navigate(['/']);
+    this.showSnackbar('Back to List Page!', 'success');
+  }
+
+  showSnackbar(message: string, type: 'success' | 'error') {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      panelClass: type,
+    });
   }
 }

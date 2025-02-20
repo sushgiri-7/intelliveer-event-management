@@ -18,8 +18,7 @@ export class EventFormComponent implements OnInit {
     private fb: FormBuilder,
     private eventService: EventService,
     private route: ActivatedRoute,
-    private router: Router,
-    private snackBar: MatSnackBar
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -52,24 +51,23 @@ export class EventFormComponent implements OnInit {
 
       if (this.eventId) {
         this.eventService.updateEvent(eventData);
-        this.showSnackbar('Event updated successfully!', 'success');
+        this.eventService.showSnackbar(
+          'Event updated successfully!',
+          'success'
+        );
       } else {
         this.eventService.addEvent(eventData);
-        this.showSnackbar('Event created successfully!', 'success');
+        this.eventService.showSnackbar(
+          'Event created successfully!',
+          'success'
+        );
       }
 
       this.router.navigate(['/']);
     }
   }
 
-  showSnackbar(message: string, type: 'success' | 'error') {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: type,
-    });
-  }
-
   redirectToListPage() {
-    this.router.navigate(['/']);
+    this.eventService.redirectToListPage();
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { EventService } from './services/event.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   isDarkMode = false;
-  constructor(private router: Router) {}
+  constructor(private eventService: EventService) {}
 
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
@@ -16,6 +17,6 @@ export class AppComponent {
   }
 
   redirectToListPage() {
-    this.router.navigate(['/']);
+    this.eventService.redirectToListPage();
   }
 }

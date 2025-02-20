@@ -6,6 +6,7 @@ import { Event } from '../../state/event.model';
 @Component({
   selector: 'app-event-details',
   templateUrl: './event-details.component.html',
+  styleUrls: ['./event-details.component.scss'],
 })
 export class EventDetailsComponent implements OnInit {
   event!: Event;
@@ -18,5 +19,13 @@ export class EventDetailsComponent implements OnInit {
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.event = this.eventService.getEventById(id) || ({} as Event);
+  }
+
+  deleteEvent(id: number) {
+    this.eventService.deleteEvent(id);
+    this.eventService.redirectToListPage();
+  }
+  redirectToListPage() {
+    this.eventService.redirectToListPage();
   }
 }
