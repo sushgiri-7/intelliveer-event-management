@@ -21,10 +21,6 @@ export class EventDetailsComponent implements OnInit {
     this.event = this.eventService.getEventById(id) || ({} as Event);
   }
 
-  deleteEvent(id: number) {
-    this.eventService.deleteEvent(id);
-    this.eventService.redirectToListPage();
-  }
   redirectToListPage() {
     this.eventService.redirectToListPage();
   }

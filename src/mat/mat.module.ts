@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
 
 const Mat = [
   MatToolbarModule,
@@ -28,6 +29,10 @@ const Mat = [
   MatSnackBarModule,
   MatTableModule,
   MatPaginatorModule,
+  MatDialogModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
   MatDialogModule,
 ];
 

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../state/event.model';
-import { MatDialog } from '@angular/material/dialog';
 import { DateFilterDialogComponent } from 'src/app/shared-components/date-filter-dialog/date-filter-dialog.component';
 
 @Component({
@@ -9,38 +11,35 @@ import { DateFilterDialogComponent } from 'src/app/shared-components/date-filter
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.scss'],
 })
-export class EventListComponent implements OnInit {
-  events: Event[] = [];
-  filteredEvents: Event[] = [];
-  selectedDate: string | null = null;
-  enableDateInput: boolean = false;
+export class EventListComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['details', 'actions'];
+
+  dataSource = new MatTableDataSource<Event>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private eventService: EventService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.events = this.eventService.getEvents();
+    this.dataSource.data = this.eventService.getEvents(); // Load event data
+  }
 
-    this.filteredEvents = [...this.events];
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator; // Attach paginator after view init
   }
 
   applyFilter(event: any) {
-    const query = (event?.target as HTMLInputElement).value.toLowerCase();
-    this.filteredEvents = this.events.filter(
-      (e) =>
-        e.title.toLowerCase().includes(query) ||
-        e.location.toLowerCase().includes(query)
-    );
+    const query = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.dataSource.filter = query;
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage(); // Reset to first page on filter
+    }
   }
 
   deleteEvent(id: number) {
     this.eventService.deleteEvent(id);
-    this.ngOnInit();
-  }
-
-  onPageChange(event: any) {
-    const startIndex = event.pageIndex * event.pageSize;
-    const endIndex = startIndex + event.pageSize;
-    this.filteredEvents = this.filteredEvents.slice(startIndex, endIndex);
+    this.dataSource.data = this.eventService.getEvents(); // Refresh table data
   }
 
   openDateFilter() {
@@ -50,12 +49,18 @@ export class EventListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((selectedDate) => {
       if (selectedDate) {
-        this.filteredEvents = this.events.filter(
-          (event) =>
-            event.date === this.eventService.formatDateToUTC(selectedDate)
-        );
+        this.dataSource.data = this.eventService
+          .getEvents()
+          .filter(
+            (event) =>
+              event.date === this.eventService.formatDateToUTC(selectedDate)
+          );
       } else {
-        this.filteredEvents = [...this.events]; // Reset filter if no date selected
+        this.dataSource.data = this.eventService.getEvents(); // Reset filter
+      }
+
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
       }
     });
   }

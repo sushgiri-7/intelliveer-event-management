@@ -9,26 +9,16 @@
 
     <mat-card-content class="event-content">
       <p>
-        <mat-icon>location_on</mat-icon> <strong>Location:</strong>
+        <mat-icon>location_on</mat-icon><strong>Location:</strong>
         {{ event.location }}
       </p>
       <p>
-        <mat-icon>description</mat-icon> <strong>Description:</strong>
+        <mat-icon>description</mat-icon><strong>Description:</strong>
         {{ event.description }}
       </p>
     </mat-card-content>
 
     <mat-card-actions class="event-actions">
-      <button
-        mat-raised-button
-        color="accent"
-        [routerLink]="'/edit/' + event.id"
-      >
-        <mat-icon>edit</mat-icon> Edit
-      </button>
-      <button mat-raised-button color="warn" (click)="deleteEvent(event.id)">
-        <mat-icon>delete</mat-icon> Delete
-      </button>
       <button mat-raised-button color="primary" (click)="redirectToListPage()">
         Back
       </button>

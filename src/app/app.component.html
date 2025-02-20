@@ -3,13 +3,15 @@
   <span class="spacer"></span>
   <!-- Back Button -->
   <button
+    *ngIf="isListPageActive"
     mat-raised-button
     color="accent"
     (click)="redirectToListPage()"
     class="full-width"
   >
-    List Page
+    Back
   </button>
+  <span class="spacer"></span>
 
   <button mat-icon-button (click)="toggleDarkMode()">
     <mat-icon>{{ isDarkMode ? "light_mode" : "dark_mode" }}</mat-icon>

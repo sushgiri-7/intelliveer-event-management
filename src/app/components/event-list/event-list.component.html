@@ -3,15 +3,14 @@
     ADD EVENT
   </button>
 
-  <!-- calender-view -->
   <span class="spacer"></span>
 
   <button mat-raised-button color="primary" routerLink="/calender">
-    View Calender
+    View Calendar
   </button>
 
-  <!-- Date Filter Button on the Right -->
   <span class="spacer"></span>
+
   <button mat-stroked-button color="accent" (click)="openDateFilter()">
     <mat-icon>event</mat-icon> Filter by Date
   </button>
@@ -29,42 +28,72 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 
-  <mat-list>
-    <span *ngIf="events.length === 0"> No Data Found </span>
-    <mat-list-item
-      *ngFor="let event of filteredEvents"
-      class="custom-list-item"
-    >
-      <!-- Event Details (Left Side) -->
-      <div class="event-details">
-        <p><strong>Title: </strong>{{ event.title }}</p>
-        <p><strong>Location: </strong> {{ event.location }}</p>
-        <p><strong>Description: </strong> {{ event.description }}</p>
-      </div>
+  <!-- Table for Event List -->
+  <mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 full-width-table"
+    matSort
+  >
+    <!-- Event Details Column -->
+    <ng-container matColumnDef="details">
+      <mat-header-cell *matHeaderCellDef class="header-cell">
+        Event Details
+      </mat-header-cell>
+      <mat-cell *matCellDef="let event" class="event-details-cell">
+        <div class="event-info">
+          <h3 class="event-title">{{ event.title }}</h3>
+          <!-- <p><mat-icon>description</mat-icon> {{ event.description }}</p> -->
+          <p>
+            <mat-icon>event</mat-icon> <strong>Date: </strong>
+            {{ event.date | date : "fullDate" }}
+          </p>
+          <p>
+            <mat-icon>location_on</mat-icon> <strong>Location: </strong>
+            {{ event.location }}
+          </p>
+        </div>
+      </mat-cell>
+    </ng-container>
 
-      <!-- Right Side: Action Buttons -->
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef class="header-cell action-header">
+        Actions
+      </mat-header-cell>
+      <mat-cell *matCellDef="let event" class="action-buttons">
+        <button
+          mat-icon-button
+          color="primary"
+          [routerLink]="'/event/' + event.id"
+        >
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="accent"
+          [routerLink]="'/edit/' + event.id"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteEvent(event.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
 
-      <div class="action-buttons">
-        <button mat-button color="warn" [routerLink]="'/event/' + event.id">
-          <mat-icon>view</mat-icon> View
-        </button>
-        <button mat-button color="accent" [routerLink]="'/edit/' + event.id">
-          <mat-icon>edit</mat-icon> Edit
-        </button>
-        <button mat-button color="warn" (click)="deleteEvent(event.id)">
-          <mat-icon>delete</mat-icon> Delete
-        </button>
-      </div>
-    </mat-list-item>
-    <mat-divider></mat-divider>
-  </mat-list>
+    <!-- Table Header & Row -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      class="table-row"
+    ></mat-row>
+  </mat-table>
 
   <!-- Pagination -->
   <mat-paginator
-    [length]="filteredEvents.length"
     [pageSize]="5"
     [pageSizeOptions]="[5, 10, 20]"
-    (page)="onPageChange($event)"
+    showFirstLastButtons
   >
   </mat-paginator>
 </div>

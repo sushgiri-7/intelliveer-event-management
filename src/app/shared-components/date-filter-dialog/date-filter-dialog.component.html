@@ -1,6 +1,11 @@
 <h2 mat-dialog-title>
   Pick a Date
-  <button mat-button color="warn" class="clear-btn" (click)="clearDateFilter()">
+  <button
+    mat-button
+    color="accent"
+    class="clear-btn"
+    (click)="clearDateFilter()"
+  >
     <mat-icon>clear</mat-icon> Clear
   </button>
 </h2>
@@ -18,6 +23,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button (click)="closeDialog()">Cancel</button>
-  <button mat-button color="primary" (click)="applyFilter()">Apply</button>
+  <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
+  <button mat-raised-button color="accent" (click)="applyFilter()">
+    Apply
+  </button>
 </mat-dialog-actions>
