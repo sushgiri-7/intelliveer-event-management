@@ -35,9 +35,10 @@
 }
 
 mat-card-title {
-  font-weight: bold;
-  text-transform: uppercase;
-  display: block; /* Ensures proper alignment */
+  //   font-weight: bold;
+  //   text-transform: uppercase;
+  //   display: block; /* Ensures proper alignment */
+  //
 }
 
 .event-content p {
@@ -75,8 +76,9 @@ mat-card-title {
 }
 
 .header-cell {
-  font-weight: bold;
-  color: black;
+  //   font-weight: bold;
+  font-size: large;
+
   //   text-align: end;
   //   align-content: center;
   //   border-bottom: 2px solid #ddd;
@@ -100,20 +102,24 @@ mat-card-title {
   background: #f9f9f9;
 }
 
-.event-details-cell {
-  //   padding: 10px;
-  //   font-size: 14px; /* Make content slightly smaller */
-}
-
 .event-info {
   display: flex;
   flex-direction: column;
   gap: 3px; /* Reduce space between lines */
+  text-transform: capitalize;
+  .event-content-title {
+    padding-right: 0.1rem;
+    font-weight: 700;
+  }
 }
 
 .event-title {
-  font-size: 16px;
-  font-weight: bold;
+  //   font-size: 16px;
+  text-transform: capitalize;
+  font-size: medium;
+  //   text-align: center;
+  //   font-weight: bold;
+
   margin-bottom: 2px;
 }
 
@@ -128,3 +134,16 @@ mat-card-title {
 //   width: 32px;
 //   height: 32px;
 // }
+
+.no-data {
+  text-align: center;
+  font-size: 18px;
+  color: gray;
+  margin-top: 20px;
+}
+
+.action-header {
+  display: flex;
+  justify-content: center;
+  color: gray;
+}

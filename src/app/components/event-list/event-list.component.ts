@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../state/event.model';
 import { DateFilterDialogComponent } from 'src/app/shared-components/date-filter-dialog/date-filter-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/shared-components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-event-list',
@@ -13,7 +14,6 @@ import { DateFilterDialogComponent } from 'src/app/shared-components/date-filter
 })
 export class EventListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['details', 'actions'];
-
   dataSource = new MatTableDataSource<Event>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -21,11 +21,20 @@ export class EventListComponent implements OnInit, AfterViewInit {
   constructor(private eventService: EventService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.dataSource.data = this.eventService.getEvents(); // Load event data
+    this.loadEvents();
+  }
+
+  loadEvents() {
+    const events = this.eventService.getEvents();
+    this.dataSource.data = events;
+
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator;
+    }
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator; // Attach paginator after view init
+    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(event: any) {
@@ -38,8 +47,17 @@ export class EventListComponent implements OnInit, AfterViewInit {
   }
 
   deleteEvent(id: number) {
-    this.eventService.deleteEvent(id);
-    this.dataSource.data = this.eventService.getEvents(); // Refresh table data
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: { message: 'Are you sure you want to delete this event?' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.eventService.deleteEvent(id);
+        this.loadEvents();
+      }
+    });
   }
 
   openDateFilter() {
@@ -56,12 +74,16 @@ export class EventListComponent implements OnInit, AfterViewInit {
               event.date === this.eventService.formatDateToUTC(selectedDate)
           );
       } else {
-        this.dataSource.data = this.eventService.getEvents(); // Reset filter
+        this.loadEvents();
       }
 
       if (this.dataSource.paginator) {
         this.dataSource.paginator.firstPage();
       }
     });
+  }
+
+  resetFilter() {
+    this.loadEvents();
   }
 }

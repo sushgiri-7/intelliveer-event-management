@@ -12,6 +12,7 @@ import { EventFormComponent } from './components/event-form/event-form.component
 import { DateFilterDialogComponent } from './shared-components/date-filter-dialog/date-filter-dialog.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { ConfirmDialogComponent } from './shared-components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     EventFormComponent,
     DateFilterDialogComponent,
     CalendarComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

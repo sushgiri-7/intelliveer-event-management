@@ -11,15 +11,19 @@
 
   <span class="spacer"></span>
 
-  <button mat-stroked-button color="accent" (click)="openDateFilter()">
+  <button mat-raised-button color="accent" (click)="openDateFilter()">
     <mat-icon>event</mat-icon> Filter by Date
+  </button>
+  <hr />
+  <button mat-raised-button color="primary" (click)="resetFilter()">
+    Reset Date Filter
   </button>
 </mat-toolbar>
 
 <div class="container">
   <!-- Search Field -->
   <mat-form-field appearance="outline" class="search-field">
-    <mat-label>Search Events</mat-label>
+    <mat-label>Search Events by Title or Location</mat-label>
     <input
       matInput
       (keyup)="applyFilter($event)"
@@ -28,15 +32,20 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 
+  <!-- Show "No Data Found" message when there's no data -->
+  <p *ngIf="dataSource.filteredData.length === 0" class="no-data">
+    No Data Found
+  </p>
+
   <!-- Table for Event List -->
   <mat-table
+    *ngIf="dataSource.filteredData.length > 0"
     [dataSource]="dataSource"
     class="mat-elevation-z8 full-width-table"
-    matSort
   >
     <!-- Event Details Column -->
     <ng-container matColumnDef="details">
-      <mat-header-cell *matHeaderCellDef class="header-cell">
+      <mat-header-cell *matHeaderCellDef class="header-cell action-header">
         Event Details
       </mat-header-cell>
       <mat-cell *matCellDef="let event" class="event-details-cell">
@@ -44,11 +53,13 @@
           <h3 class="event-title">{{ event.title }}</h3>
           <!-- <p><mat-icon>description</mat-icon> {{ event.description }}</p> -->
           <p>
-            <mat-icon>event</mat-icon> <strong>Date: </strong>
+            <mat-icon>event</mat-icon>
+            <span class="event-content-title">Date: </span>
             {{ event.date | date : "fullDate" }}
           </p>
           <p>
-            <mat-icon>location_on</mat-icon> <strong>Location: </strong>
+            <mat-icon>location_on</mat-icon>
+            <span class="event-content-title">Location: </span>
             {{ event.location }}
           </p>
         </div>
@@ -91,6 +102,7 @@
 
   <!-- Pagination -->
   <mat-paginator
+    [length]="dataSource.filteredData.length"
     [pageSize]="5"
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons

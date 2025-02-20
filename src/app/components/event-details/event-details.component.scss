@@ -27,7 +27,7 @@ mat-card-title {
   font-size: 26px;
   font-weight: bold;
   color: #333;
-  text-transform: uppercase;
+  text-transform: capitalize;
   text-align: center;
   display: block; /* Ensures proper alignment */
 }
@@ -43,6 +43,11 @@ mat-card-subtitle {
 /* Content Styling */
 .event-content {
   margin-top: 20px;
+  text-transform: capitalize;
+  .event-content-title {
+    padding-right: 0.1rem;
+    font-weight: 500;
+  }
 }
 
 .event-content p {

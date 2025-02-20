@@ -41,6 +41,7 @@ export class EventService {
   deleteEvent(id: number) {
     this.events = this.events.filter((event) => event.id !== id);
     this.saveEvents();
+    this.showSnackbar('Event Deleted successfully!', 'success');
   }
 
   private saveEvents() {
