@@ -1,5 +1,7 @@
 <mat-card class="event-form-card">
-  <mat-card-title>{{ eventId ? "Edit Event" : "Create Event" }}</mat-card-title>
+  <mat-card-title>{{
+    eventId ? "Edit Event ✏️" : "Create Event ✏️"
+  }}</mat-card-title>
   <mat-card-content>
     <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="event-form">
       <!-- Title -->

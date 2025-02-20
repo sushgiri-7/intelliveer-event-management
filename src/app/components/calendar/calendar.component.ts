@@ -23,7 +23,6 @@ export class CalendarComponent implements OnInit {
         right: 'dayGridMonth,dayGridWeek,dayGridDay',
       },
       height: 500, //  calendar height
-      // width: 500,
       contentHeight: 300, // Further compact it
       aspectRatio: 1.8, // Adjust proportions for better visibility
       events: [],

@@ -18,7 +18,7 @@
 
 .search-field {
   width: 100%;
-  max-width: 600px; /* Adjust width if needed */
+  max-width: 600px;
   display: block;
   margin: 0.5rem auto;
 
@@ -32,13 +32,6 @@
     margin-right: 0.5rem;
     border-radius: 8px;
   }
-}
-
-mat-card-title {
-  //   font-weight: bold;
-  //   text-transform: uppercase;
-  //   display: block; /* Ensures proper alignment */
-  //
 }
 
 .event-content p {
@@ -70,24 +63,15 @@ mat-card-title {
 
 .full-width-table {
   width: 95%;
-  margin: 20px auto; /* Added margin around the table */
+  margin: 20px auto;
   border-collapse: collapse;
   background-color: rgb(238, 234, 226);
 }
 
 .header-cell {
-  //   font-weight: bold;
   font-size: large;
-
-  //   text-align: end;
-  //   align-content: center;
-  //   border-bottom: 2px solid #ddd;
   border: 0.5px solid #c8bebe;
 }
-
-// .action-header {
-//   text-align: center;
-// }
 
 .table-row {
   color: black;
@@ -95,7 +79,6 @@ mat-card-title {
   border-radius: 5px;
   border: 0.5px solid #c8bebe;
   transition: all 0.3s ease;
-  //   height: 50px; /* Reduced row height */
 }
 
 .table-row:hover {
@@ -105,7 +88,7 @@ mat-card-title {
 .event-info {
   display: flex;
   flex-direction: column;
-  gap: 3px; /* Reduce space between lines */
+  gap: 3px;
   text-transform: capitalize;
   .event-content-title {
     padding-right: 0.1rem;
@@ -114,12 +97,8 @@ mat-card-title {
 }
 
 .event-title {
-  //   font-size: 16px;
   text-transform: capitalize;
   font-size: medium;
-  //   text-align: center;
-  //   font-weight: bold;
-
   margin-bottom: 2px;
 }
 
@@ -127,14 +106,8 @@ mat-card-title {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px; /* Reduce button spacing */
+  gap: 5px;
 }
-
-// mat-icon-button {
-//   width: 32px;
-//   height: 32px;
-// }
-
 .no-data {
   text-align: center;
   font-size: 18px;

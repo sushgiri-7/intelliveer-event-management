@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../state/event.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-event-form',

@@ -7,10 +7,16 @@
 .event-form-card {
   max-width: 500px;
   margin: auto;
-  padding: 20px;
 }
 
 .event-form {
   display: flex;
   flex-direction: column;
+}
+
+mat-card-title {
+  padding-top: 0.5rem;
+  text-align: center;
+  padding-bottom: 1rem;
+  font-size: medium;
 }
