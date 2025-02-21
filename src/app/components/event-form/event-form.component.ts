@@ -12,6 +12,7 @@ import { Event } from '../../state/event.model';
 export class EventFormComponent implements OnInit {
   eventForm!: FormGroup;
   eventId: number | null = null;
+  minDate: Date = new Date();
 
   constructor(
     private fb: FormBuilder,

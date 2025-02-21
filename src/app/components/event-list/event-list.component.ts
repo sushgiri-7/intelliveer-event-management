@@ -26,8 +26,10 @@ export class EventListComponent implements OnInit, AfterViewInit {
 
   loadEvents() {
     const events = this.eventService.getEvents();
-    this.dataSource.data = events;
-
+    const sortedEvents = events.sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
+    this.dataSource.data = [...sortedEvents];
     if (this.paginator) {
       this.dataSource.paginator = this.paginator;
     }
