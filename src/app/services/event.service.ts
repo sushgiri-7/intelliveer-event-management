@@ -23,7 +23,7 @@ export class EventService {
   }
 
   addEvent(event: Event) {
-    event.id = this.events.length + 1;
+    event.id = Math.floor(Math.random() * 1000000);
     this.events.push(event);
     this.saveEvents();
   }
